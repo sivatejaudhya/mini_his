@@ -1,7 +1,14 @@
 from fastapi import FastAPI
+from .config import settings  # import settings
 
-app = FastAPI(title="Mini_HIS", version="0.1.0")
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    version=settings.VERSION
+)
 
 @app.get("/health")
-def health():
-    return {"status": "healthy"}
+def root():
+    return {
+        "message": f"{settings.PROJECT_NAME} backend is alive 🚀",
+        "version": settings.VERSION
+    }
